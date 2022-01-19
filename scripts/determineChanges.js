@@ -8,7 +8,10 @@ const findChanges = async () => {
     cat changes.txt
   `);
 
-  console.log(stdout);
+  console.log(
+    "The following files have been modified since the last commit..."
+  );
+  console.log(stdout.split("\n"));
 };
 
 findChanges();
