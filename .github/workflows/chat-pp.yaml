@@ -9,7 +9,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Cache node_modules
-        uses: actions/checkout@v2
+        uses: actions/setup-node@v2
         with:
           node-version: "16"
           cache: "npm"
@@ -28,22 +28,27 @@ jobs:
           name: builtScripts
           path: packages/scripts/build
 
-  # changes:
-  #   name: Gather changes
-  #   runs-on: ubuntu-latest
-  #   needs: ["buildScripts"]
-  #   steps:
-  #     - name: Checkout
-  #       uses: actions/checkout@v2
-  #       with:
-  #         fetch-depth: 0
+  changes:
+    name: Gather changes
+    runs-on: ubuntu-latest
+    needs: ["buildScripts"]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
 
-  #     - name: Download built scripts
-  #       uses: actions/download-artifact@v2
-  #       with:
-  #         name: builtScripts
+      - name: Download built scripts
+        uses: actions/download-artifact@v2
+        with:
+          name: builtScripts
 
-  #     - name: See changes
-  #       run: |
-  #         git diff --name-only ${{ github.event.before }}..${{ github.event.after }} >> changes.txt
-  #         node builtScripts/determineChanges.js
+      - name: See download dir
+        run: |
+          cd builtScript
+          cat determineChanges.js
+
+      - name: See changes
+        run: |
+          git diff --name-only ${{ github.event.before }}..${{ github.event.after }} >> changes.txt
+          node builtScripts/determineChanges.js
