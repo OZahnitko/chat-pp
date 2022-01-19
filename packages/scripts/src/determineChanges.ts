@@ -13,8 +13,6 @@ export const findChangedFiles = async (): Promise<string[]> => {
   return stdout.split("\n").filter((path) => !!path);
 };
 
-// findChangedFiles();
-
 export const filterChangedFiles = (
   fileList: string[]
 ): { packageChanges: string[] } => {
@@ -28,5 +26,6 @@ export const filterChangedFiles = (
 (async () => {
   const changes = await findChangedFiles();
   console.log(changes);
+  console.log("The following files will require some processing...");
   console.log(filterChangedFiles(changes));
 })();
