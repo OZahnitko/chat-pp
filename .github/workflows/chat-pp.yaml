@@ -25,7 +25,7 @@ jobs:
       - name: Copy over project files
         working-directory: packages/scripts
         run: |
-          cp ./{node_modules,package.json} ./build
+          cp -r ./{node_modules,package.json} ./build
 
       - name: Archive build scripts
         uses: actions/upload-artifact@v2
