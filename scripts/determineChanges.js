@@ -11,7 +11,7 @@ const findChanges = async () => {
   console.log(
     "The following files have been modified since the last commit..."
   );
-  console.log(stdout.split("\n"));
+  console.log(stdout.split("\n").filter((path) => !!path));
 };
 
 findChanges();
