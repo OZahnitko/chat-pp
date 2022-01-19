@@ -1,4 +1,3 @@
-import chalk from "chalk";
 import { exec as syncExec } from "child_process";
 import { promisify } from "util";
 
@@ -9,9 +8,7 @@ const findChangedFiles = async () => {
         cat changes.txt
     `);
   console.log("The following files have changed since the last commit...");
-  console.log(
-    chalk.bold(chalk.blue(stdout.split("\n").filter((path) => !!path)))
-  );
+  console.log(stdout.split("\n").filter((path) => !!path));
 };
 
 findChangedFiles();
