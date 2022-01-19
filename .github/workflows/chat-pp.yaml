@@ -1,15 +1,49 @@
 name: Chat-PP
 on: push
 jobs:
-  changes:
-    name: Gather changes
+  buildScripts:
+    name: Build scripts
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Cache node_modules
         uses: actions/checkout@v2
         with:
-          fetch-depth: 0
-      - name: See changes
-        run: |
-          git diff --name-only ${{ github.event.before }}..${{ github.event.after }} >> changes.txt
-          node ./scripts/determineChanges.js
+          node-version: "16"
+          cache: "npm"
+
+      - name: Install dependencies
+        working-directory: packages/scripts
+        run: npm install
+
+      - name: Build scripts
+        working-directory: packages/scripts
+        run: npm run build
+
+      - name: Archive build scripts
+        uses: actions/upload-artifact@v2
+        with:
+          name: builtScripts
+          path: packages/scripts/build
+
+  # changes:
+  #   name: Gather changes
+  #   runs-on: ubuntu-latest
+  #   needs: ["buildScripts"]
+  #   steps:
+  #     - name: Checkout
+  #       uses: actions/checkout@v2
+  #       with:
+  #         fetch-depth: 0
+
+  #     - name: Download built scripts
+  #       uses: actions/download-artifact@v2
+  #       with:
+  #         name: builtScripts
+
+  #     - name: See changes
+  #       run: |
+  #         git diff --name-only ${{ github.event.before }}..${{ github.event.after }} >> changes.txt
+  #         node builtScripts/determineChanges.js
