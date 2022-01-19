@@ -1,0 +1,13 @@
+name: Chat-PP
+on: push
+jobs:
+  changes:
+    name: Gather changes
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+        run: |
+          echo "CHANGED_FILES=$(git diff --name-only ${{ github.event.before }}..${{ github.event.after }})" >>
