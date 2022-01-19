@@ -29,7 +29,7 @@ jobs:
           path: packages/scripts/build
 
   changes:
-    name: Gather changes
+    name: Determine changes
     runs-on: ubuntu-latest
     needs: ["buildScripts"]
     steps:
@@ -45,8 +45,7 @@ jobs:
 
       - name: See download dir
         run: |
-          cd builtScript
-          cat determineChanges.js
+          ls -la
 
       - name: See changes
         run: |
