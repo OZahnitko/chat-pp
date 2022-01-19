@@ -14,3 +14,4 @@ jobs:
           git diff --name-only ${{ github.event.before }}..${{ github.event.after }} >> changes.txt
           cat changes.txt
           node ./scripts/determineChanges.js
+          echo "We are the POLIS!"

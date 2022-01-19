@@ -5,7 +5,7 @@ const exec = promisify(syncExec);
 
 const findChanges = async () => {
   const { stdout } = await exec(`
-    echo Yeets
+    cat changes.txt
   `);
 
   console.log(stdout);
