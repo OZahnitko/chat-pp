@@ -10,6 +10,4 @@ jobs:
         with:
           fetch-depth: 0
       - name: See changes
-        run: |
-          echo "CHANGED_FILES=$(git diff --name-only ${{ github.event.before }}..${{ github.event.after }})"
-          node -v
+        run: node ./scripts/determineChanges.js
