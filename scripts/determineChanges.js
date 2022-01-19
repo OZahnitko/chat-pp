@@ -5,7 +5,7 @@ const exec = promisify(syncExec);
 
 const findChanges = async () => {
   const { stdout } = await exec(
-    "git diff --name-only ${{ github.event.before }}..${{ github.event.afters }}"
+    `git diff --name-only \`${{ github.event.before }}\`..\`${{ github.event.after }}\``
   );
 
   console.log(stdout);
