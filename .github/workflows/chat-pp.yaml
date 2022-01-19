@@ -11,6 +11,6 @@ jobs:
           fetch-depth: 0
       - name: See changes
         run: |
-          gut diff --name-only ${{ github.event.before }}..${{ github.event.after }} >> changes.txt
+          git diff --name-only ${{ github.event.before }}..${{ github.event.after }} >> changes.txt
           cat changes.txt
           node ./scripts/determineChanges.js
