@@ -28,7 +28,8 @@ export const filterChangedFiles = (
   console.log(changes);
   console.log("The following files will require some processing...");
   console.log(filterChangedFiles(changes));
-  await exec(`
+  const { stdout } = await exec(`
     echo "::set-output name=BUILD_LAMBDA_FUNCTIONS::true"
   `);
+  console.log(stdout);
 })();

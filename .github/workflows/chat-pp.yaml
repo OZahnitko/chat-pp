@@ -61,6 +61,8 @@ jobs:
     name: Determine changes
     runs-on: ubuntu-latest
     needs: ["buildScripts"]
+    outputs:
+      BUILD_LAMBDA_FUNCTIONS: ${{ steps.changes.outputs.BUILD_LAMBDA_FUNCTIONS }}
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -74,6 +76,7 @@ jobs:
           path: ./builtScripts
 
       - name: See changes
+        id: changes
         run: |
           git diff --name-only ${{ github.event.before }}..${{ github.event.after }} >> changes.txt
           node builtScripts/determineChanges.js
