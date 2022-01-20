@@ -24,7 +24,7 @@ jobs:
 
   infrastructure:
     name: Infrastructure
-    runs-on: ubuntu
+    runs-on: ubuntu-latest
     steps:
       - name: Terraform
         run: |
@@ -99,6 +99,7 @@ jobs:
         run: |
           echo "Building Lambda Functions"
           echo ${{ needs.changes.outputs.BUILD_LAMBDA_FUNCTIONS }}
+
   buildLambdaFunctionsLayer:
     name: Build Lambda Functions Layer
     needs: ["changes"]
