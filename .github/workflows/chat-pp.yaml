@@ -51,10 +51,6 @@ jobs:
           name: builtScripts
           path: ./builtScripts
 
-      - name: See download dir
-        run: |
-          ls -la
-
       - name: See changes
         run: |
           git diff --name-only ${{ github.event.before }}..${{ github.event.after }} >> changes.txt

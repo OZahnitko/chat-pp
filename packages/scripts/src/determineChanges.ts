@@ -1,7 +1,7 @@
 import { exec as syncExec } from "child_process";
 import { promisify } from "util";
 
-const exec = promisify(syncExec);
+export const exec = promisify(syncExec);
 
 export const findChangedFiles = async (): Promise<string[]> => {
   const { stdout } = await exec(`
