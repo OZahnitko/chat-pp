@@ -98,5 +98,5 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Only run if the Lambda Functions layer needs to be rebuilt
-        runs: |
+        run: |
           echo "Rebuilding layer"
