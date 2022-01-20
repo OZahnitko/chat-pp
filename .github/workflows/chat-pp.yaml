@@ -22,6 +22,14 @@ jobs:
         working-directory: packages/scripts
         run: npm run test
 
+  infrastructure:
+    name: Infrastructure
+    runs-on: ubuntu
+    steps:
+      - name: Terraform
+        run: |
+          echo "Will run infrastructure!!!"
+
   buildScripts:
     name: Build scripts
     runs-on: ubuntu-latest
