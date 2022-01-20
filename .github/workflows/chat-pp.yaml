@@ -84,10 +84,9 @@ jobs:
   buildLambdaFunctions:
     name: Build Lambda Functions
     needs: ["changes"]
-    # if: ${{ needs.changes.outputs.BUILD_LAMBDA_FUNCTIONS=='true' }}
+    if: ${{ needs.changes.outputs.BUILD_LAMBDA_FUNCTIONS=='true' }}
     runs-on: ubuntu-latest
     steps:
       - name: Only run if Lambda Functions need building
         run: |
           echo "Building Lambda Functions"
-          echo ${{ needs.changes.outputs.BUILD_LAMBDA_FUNCTIONS }}
