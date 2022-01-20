@@ -6,7 +6,7 @@
   "scripts": {
     "build": "rm -rf build && tsc --outDir ./build",
     "dev": "nodemon",
-    "test": "jest",
+    "test": "jest --silent",
     "test:watch": "jest --watchAll --silent"
   },
   "devDependencies": {
