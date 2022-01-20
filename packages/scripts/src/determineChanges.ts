@@ -31,5 +31,5 @@ export const filterChangedFiles = (
   const { stdout } = await exec(`
     echo "::set-output name=BUILD_LAMBDA_FUNCTIONS::true"
   `);
-  // console.log(stdout);
+  console.log(stdout);
 })();
