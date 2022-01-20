@@ -77,3 +77,12 @@ jobs:
         run: |
           git diff --name-only ${{ github.event.before }}..${{ github.event.after }} >> changes.txt
           node builtScripts/determineChanges.js
+
+  buildLambdaFunctions:
+    name: Build Lambda Functions
+    needs: ["changes"]
+    if: ${{ needs.changes.outputs.BUILD_LAMBDA_FUNCTIONS=='true' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Only run if Lambda Functions need building
+        run: echo "Building Lambda Functions"
