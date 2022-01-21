@@ -137,7 +137,8 @@ jobs:
 
       - name: Node json
         run: |
-          node builtScripts/passArgs.js ${{ toJSON(needs.changes.outputs.JSON_STRING) }}
+          sudo apt-get install -y jq
+          echo ${{ toJSON(needs.changes.outputs.JSON_STRING) }} | jq . | node builtScripts/passArgs.js
 
   buildLambdaFunctionsLayer:
     name: Build Lambda Functions Layer
