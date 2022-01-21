@@ -34,7 +34,7 @@ export const filterChangedFiles = (
       question: "What are you going to do about it?",
       questionTwo: "Call, the POLIS?",
       response: "Mate, we are the POLIS!",
-    })}"
+    }).replace(/\\"/g, '"')}"
   `);
   console.log(stdout);
 })();
