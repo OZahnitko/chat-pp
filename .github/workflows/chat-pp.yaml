@@ -8,10 +8,10 @@ jobs:
       - name: Branch name
         run: |
           echo ${GITHUB_REF#refs/*/}
-          echo "BB_BRANCH=$(echo ${GITHUB_REF#refs/*/})" >> $GITHUB_ENV
+          BB_BRANCH=${GITHUB_REF#refs/*/}
+          echo "BBB_BRANCH=$BB_BRANCH" >> $GITHUB_ENV
+          echo "${{ env.BBB_BRANCH }}"
           echo $GITHUB_REF_NAME
-          echo $GITHUB_REF
-          echo $BB_BRANCH
 
       - name: Checkout code
         uses: actions/checkout@v2
@@ -96,14 +96,6 @@ jobs:
         run: |
           git diff --name-only ${{ github.event.before }}..${{ github.event.after }} >> changes.txt
           node builtScripts/determineChanges.js
-
-      - name: Branch name
-        run: |
-          echo ${GITHUB_REF#refs/*/}
-          echo "BB_BRANCH=$(echo ${GITHUB_REF#refs/*/})" >> $GITHUB_ENV
-          echo $GITHUB_REF_NAME
-          echo $GITHUB_REF
-          echo $BB_BRANCH
 
   buildLambdaFunctions:
     name: Build Lambda Functions
