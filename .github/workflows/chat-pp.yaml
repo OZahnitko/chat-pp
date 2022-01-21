@@ -1,7 +1,5 @@
 name: Chat-PP
 on: push
-env:
-  BBB_BRANCH: default_main
 jobs:
   testScripts:
     name: Test scripts
@@ -17,6 +15,10 @@ jobs:
           echo "BBB"
           echo "${{ env.BBB_BRANCH }}"
           echo $GITHUB_REF_NAME
+
+      - name: The next episode
+        run: |
+          echo ${{ env.BBB_BRANCH }}
 
       - name: Checkout code
         uses: actions/checkout@v2
