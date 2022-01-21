@@ -98,6 +98,15 @@ jobs:
           name: builtScripts
           path: ./builtScripts
 
+      - name: Node script set env variables.
+        run: |
+          node builtScripts/setEnvVariables.js
+
+      - name: The next Node episode.
+        run: |
+          echo ${{ env.LAMBDA_FUNCTIONS_chat-message }}
+          echo ${{ env.LAMBDA_FUNCTIONS-chat-broadcast }}
+
       - name: See changes
         id: changes
         run: |
