@@ -96,7 +96,7 @@ jobs:
           cat changes.json
 
       - name: Upload changes
-        uses: action/upload-artifact@v2
+        uses: actions/upload-artifact@v2
         with:
           name: changes
           path: ./changes.json
