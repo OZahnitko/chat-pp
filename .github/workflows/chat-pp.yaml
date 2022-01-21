@@ -89,6 +89,12 @@ jobs:
           git diff --name-only ${{ github.event.before }}..${{ github.event.after }} >> changes.txt
           node builtScripts/determineChanges.js
 
+      - name: Branch name
+        run: |
+          echo ${GITHUB_REF#refs/*/}
+          echo "BB_BRANCH=$(echo ${GITHUB_REF#refs/*/})" >> $GITHUB_ENV
+          echo ${{ env.BB_BRANCH }}
+
   buildLambdaFunctions:
     name: Build Lambda Functions
     needs: ["changes"]
