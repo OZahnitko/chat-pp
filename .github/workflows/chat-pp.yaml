@@ -104,8 +104,10 @@ jobs:
 
       - name: The next Node episode.
         run: |
+          echo "chat-message -> ${{ env.LAMBDA_FUNCTIONS_chat-message }}"
           echo ${{ env.LAMBDA_FUNCTIONS_chat-message }}
-          echo ${{ env.LAMBDA_FUNCTIONS-chat-broadcast }}
+          echo ${{ env.LAMBDA_FUNCTIONS_chat-broadcast }}
+          echo "chat-broadcast -> ${{ env.LAMBDA_FUNCTIONS_chat-broadcast }}"
 
       - name: See changes
         id: changes
@@ -123,6 +125,13 @@ jobs:
         run: |
           echo "Building Lambda Functions"
           echo ${{ needs.changes.outputs.BUILD_LAMBDA_FUNCTIONS }}
+
+      - name: What about the next jobber.
+        run: |
+          echo "chat-message -> ${{ env.LAMBDA_FUNCTIONS_chat-message }}"
+          echo ${{ env.LAMBDA_FUNCTIONS_chat-message }}
+          echo ${{ env.LAMBDA_FUNCTIONS_chat-broadcast }}
+          echo "chat-broadcast -> ${{ env.LAMBDA_FUNCTIONS_chat-broadcast }}"
 
   buildLambdaFunctionsLayer:
     name: Build Lambda Functions Layer
