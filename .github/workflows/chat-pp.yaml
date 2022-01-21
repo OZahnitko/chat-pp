@@ -129,6 +129,16 @@ jobs:
           echo ${{ needs.changes.outputs.BUILD_LAMBDA_FUNCTIONS }}
           echo ${{ needs.changes.outputs.JSON_STRING }}
 
+      - name: Download built scripts
+        uses: actions/download-artifacts@v2
+        with:
+          name: builtScripts
+          path: ./builtScripts
+
+      - name: Node json
+        run: |
+          node builtScripts/passArgs.js ${{ needs.changes.outputs.JSON_STRING }}
+
   buildLambdaFunctionsLayer:
     name: Build Lambda Functions Layer
     needs: ["changes"]
