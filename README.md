@@ -14,6 +14,7 @@
 ### TODO
 
 - [ ] Figure out how to pass params to Node scripts from the terminal.
+  - Figured out a couple of things with this one.
 
 ## Lambda Functions
 
