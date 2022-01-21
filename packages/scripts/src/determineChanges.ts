@@ -32,7 +32,16 @@ export const filterChangedFiles = (
   const changeData = filterChangedFiles(changes);
   await writeFile("./changes.json", JSON.stringify(changeData));
   const { stdout: outputLogsRaw } = await exec(`
-    echo "::set-output name=BUILD_LAMBDA_FUNCTIONS::true"
+  echo "::set-output name=BUILD_LAMBDA_FUNCTIONS::true"
   `);
+  const outputs = ["BUILD_LAMBDA_FUNCTIONS", "BUILD_LAMBDA_FUNCTIONS_LAYER"];
   console.log(outputLogsRaw);
+  const responses = await Promise.all(
+    outputs.map((output) =>
+      exec(`
+        echo "::set-output name=${output}::true"
+      `)
+    )
+  );
+  responses.forEach(({ stdout }) => console.log(stdout));
 })();
