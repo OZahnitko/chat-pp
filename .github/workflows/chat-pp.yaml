@@ -1,7 +1,7 @@
 name: Chat-PP
 on: push
 env:
-  BBB_BRANCH: testing
+  BBB_BRANCH: default_main
 jobs:
   testScripts:
     name: Test scripts
@@ -9,6 +9,7 @@ jobs:
     steps:
       - name: Branch name
         run: |
+          echo "${{ env.BBB_BRANCH }}"
           echo ${GITHUB_REF#refs/*/}
           BB_BRANCH=${GITHUB_REF#refs/*/}
           echo $BB_BRANCH
