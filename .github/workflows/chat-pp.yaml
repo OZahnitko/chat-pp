@@ -13,7 +13,7 @@ jobs:
           echo ${GITHUB_REF#refs/*/}
           BB_BRANCH=${GITHUB_REF#refs/*/}
           echo $BB_BRANCH
-          echo "BBB_BRANCH=$BB_BRANCH" >> $GITHUB_ENV
+          echo "BBB_BRANCH=moose" >> $GITHUB_ENV
           echo "BBB"
           echo "${{ env.BBB_BRANCH }}"
           echo $GITHUB_REF_NAME
