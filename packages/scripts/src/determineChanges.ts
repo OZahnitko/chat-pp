@@ -1,7 +1,9 @@
 import { exec as syncExec } from "child_process";
+import { writeFile as syncWriteFile } from "fs";
 import { promisify } from "util";
 
 export const exec = promisify(syncExec);
+export const writeFile = promisify(syncWriteFile);
 
 export const findChangedFiles = async (): Promise<string[]> => {
   const { stdout } = await exec(`
@@ -26,11 +28,10 @@ export const filterChangedFiles = (
 (async () => {
   const changes = await findChangedFiles();
   console.log(changes);
-  console.log("The following files will require some processing...");
+  console.log("The following files will require processing...");
   console.log(filterChangedFiles(changes));
-  const { stdout } = await exec(`
-    echo "::set-output name=BUILD_LAMBDA_FUNCTIONS::true"
-    echo "::set-output name=JSON_STRING::'{"yes":"yes","message":"Mate, POLIS"}'"
-  `);
-  console.log(stdout);
+  await writeFile(
+    "./changes.json",
+    JSON.stringify(filterChangedFiles(changes))
+  );
 })();
