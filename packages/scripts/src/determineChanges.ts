@@ -30,7 +30,6 @@ export const filterChangedFiles = (
   console.log(filterChangedFiles(changes));
   const { stdout } = await exec(`
     echo "::set-output name=BUILD_LAMBDA_FUNCTIONS::true"
-    echo "::set-output name=JSON_STRING::$(jo -p message=POLIS)"
   `);
   console.log(stdout);
 })();

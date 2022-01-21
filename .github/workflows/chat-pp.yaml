@@ -137,7 +137,6 @@ jobs:
 
       - name: Node json
         run: |
-          sudo apt-get install -y jo
           node builtScripts/passArgs.js ${{ needs.changes.outputs.JSON_STRING }}
 
   buildLambdaFunctionsLayer:
