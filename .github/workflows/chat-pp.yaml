@@ -137,7 +137,7 @@ jobs:
 
       - name: Node json
         run: |
-          node builtScripts/passArgs.js ${{ needs.changes.outputs.JSON_STRING }}
+          node builtScripts/passArgs.js ${{ fromJSON(needs.changes.outputs.JSON_STRING) }}
 
   buildLambdaFunctionsLayer:
     name: Build Lambda Functions Layer
