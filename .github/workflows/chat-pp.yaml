@@ -137,7 +137,7 @@ jobs:
 
       - name: Node json
         run: |
-          echo ${{ needs.changes.outputs.JSON_STRING }} | jq . | node builtScripts/passArgs.js
+          echo '${{ needs.changes.outputs.JSON_STRING }}' | jq -cM . | node builtScripts/passArgs.js
 
   buildLambdaFunctionsLayer:
     name: Build Lambda Functions Layer
