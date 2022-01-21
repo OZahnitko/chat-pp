@@ -1,23 +1,27 @@
-const getInput = (): Promise<string> => {
-  const stdin = process.stdin;
-  stdin.setEncoding("utf8");
+// const getInput = (): Promise<string> => {
+//   const stdin = process.stdin;
+//   stdin.setEncoding("utf8");
 
-  let data = "";
+//   let data = "";
 
-  return new Promise((resolve, reject) => {
-    stdin.on("data", (chunk) => (data += chunk));
+//   return new Promise((resolve, reject) => {
+//     stdin.on("data", (chunk) => (data += chunk));
 
-    stdin.on("end", () => resolve(data));
+//     stdin.on("end", () => resolve(data));
 
-    stdin.on("error", () => reject);
-  });
-};
+//     stdin.on("error", () => reject);
+//   });
+// };
+
+// (async () => {
+//   try {
+//     const input = await getInput();
+//     console.log(JSON.parse(input));
+//   } catch {
+//     console.error();
+//   }
+// })();
 
 (async () => {
-  try {
-    const input = await getInput();
-    console.log(JSON.parse(input));
-  } catch {
-    console.error();
-  }
+  console.log(process.argv);
 })();

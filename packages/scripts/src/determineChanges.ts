@@ -30,11 +30,7 @@ export const filterChangedFiles = (
   console.log(filterChangedFiles(changes));
   const { stdout } = await exec(`
     echo "::set-output name=BUILD_LAMBDA_FUNCTIONS::true"
-    echo "::set-output name=JSON_STRING::${JSON.stringify({
-      question: "What are you going to do about it?",
-      questionTwo: "Call, the POLIS?",
-      response: "Mate, we are the POLIS!",
-    })}"
+    echo "::set-output name=JSON_STRING::jo -p message=POLIS"
   `);
   console.log(stdout);
 })();
