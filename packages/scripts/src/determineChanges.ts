@@ -31,7 +31,8 @@ export const filterChangedFiles = (
   console.log("The following files will require processing...");
   const changeData = filterChangedFiles(changes);
   await writeFile("./changes.json", JSON.stringify(changeData));
-  const {} = await exec(`
+  const { stdout: outputLogsRaw } = await exec(`
     echo "::set-output name=BUILD_LAMBDA_FUNCTIONS::true"
   `);
+  console.log(outputLogsRaw);
 })();
