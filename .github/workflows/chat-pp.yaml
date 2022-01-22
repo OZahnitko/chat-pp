@@ -77,7 +77,7 @@ jobs:
     needs: ["buildScripts"]
     outputs:
       BUILD_LAMBDA_FUNCTIONS: ${{ steps.changes.outputs.BUILD_LAMBDA_FUNCTIONS }}
-      JSON_STRING: ${{ steps.changes.outputs.JSON_STRING }}
+      BUILD_LAMBDA_FUNCTIONS_LAYER: ${{ steps.changes.outputs.BUILD_LAMBDA_FUNCTIONS_LAYER }}
     steps:
       - name: Checkout
         uses: actions/checkout@v2
