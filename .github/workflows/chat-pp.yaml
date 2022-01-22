@@ -109,6 +109,9 @@ jobs:
     if: ${{ needs.changes.outputs.BUILD_LAMBDA_FUNCTIONS == 'true' }}
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
       - name: Download built scripts
         uses: actions/download-artifact@v2
         with:
@@ -124,6 +127,9 @@ jobs:
         run: |
           ls -la
           cat changes.json
+
+      - name: Run Build Lambda Functions scripts
+        run: node ./packages/lambda-functions/scripts/buildFunctions.js
 
   buildLambdaFunctionsLayer:
     name: Build Lambda Functions Layer
