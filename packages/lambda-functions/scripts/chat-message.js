@@ -5,7 +5,7 @@ const { promisify } = require("util");
 const exec = promisify(syncPromise);
 const writeFile = promisify(writeFileSync);
 
-const BRANCH = process.env.BB_BRANCH;
+const BRANCH = process.env.GITHUB_REF_NAME;
 const FUNCTION_NAME = "chat-message";
 let LATEST_FUNCTION_VERSION;
 

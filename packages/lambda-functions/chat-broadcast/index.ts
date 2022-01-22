@@ -1,1 +1,3 @@
-console.log("yes");
+export const handler = async () => {
+  return { statusCode: 200, body: "YEEEEEEEEEEEEE" };
+};
