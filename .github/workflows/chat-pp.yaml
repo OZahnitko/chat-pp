@@ -115,6 +115,16 @@ jobs:
           name: builtScripts
           path: ./builtScripts
 
+      - name: Download changes.json
+        uses: actions/download-artifact@v2
+        with:
+          name: changes
+
+      - name: See changes
+        run: |
+          ls -la
+          cat changes.json
+
   buildLambdaFunctionsLayer:
     name: Build Lambda Functions Layer
     needs: ["changes"]
