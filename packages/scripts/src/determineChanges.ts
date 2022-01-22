@@ -15,14 +15,40 @@ export const findChangedFiles = async (): Promise<string[]> => {
   return stdout.split("\n").filter((path) => !!path);
 };
 
+const findPackages = (changes: string[]) => {
+  return Array.from(new Set(changes.map((change) => change.split("/")[0])));
+};
+
+const determineLambdaFunctions = (packageChanges: string[]) => {
+  return {
+    functions: packageChanges
+      .filter((change) => change.includes("lambda-functions"))
+      .filter((change) => change.split("/").length > 2)
+      .map((change) => change.split("/")[1]),
+    layer: !!packageChanges
+      .filter((change) => change.includes("lambda-functions"))
+      .filter((change) => change.includes("package.json")).length,
+  };
+};
+
 export const filterChangedFiles = (
   fileList: string[]
-): { packageChanges: string[] } => {
+): { packageChanges: any } => {
   const packageChanges = fileList
     .filter((filePath) => filePath.includes("packages"))
     .map((file) => file.split("/").slice(1).join("/"));
 
-  return { packageChanges };
+  return {
+    packageChanges: findPackages(packageChanges).reduce((acc, val) => {
+      return {
+        ...acc,
+        [val]:
+          val === "lambda-functions"
+            ? determineLambdaFunctions(packageChanges)
+            : {},
+      };
+    }, {} as any),
+  };
 };
 
 (async () => {
@@ -32,7 +58,7 @@ export const filterChangedFiles = (
   const changeData = filterChangedFiles(changes);
   await writeFile("./changes.json", JSON.stringify(changeData));
   const { stdout: outputLogsRaw } = await exec(`
-  echo "::set-output name=BUILD_LAMBDA_FUNCTIONS::true"
+    echo "::set-output name=BUILD_LAMBDA_FUNCTIONS::true"
   `);
   const outputs = ["BUILD_LAMBDA_FUNCTIONS", "BUILD_LAMBDA_FUNCTIONS_LAYER"];
   console.log(outputLogsRaw);
