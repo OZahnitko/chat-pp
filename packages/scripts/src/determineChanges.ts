@@ -73,5 +73,16 @@ export const filterChangedFiles = (
   // responses.forEach(({ stdout }) => console.log(stdout));
   if (changeData.packageChanges["lambda-functions"].functions.length) {
     console.log("building functions");
+    const { stdout: buildLambdaFunctionsEnvRaw } = await exec(`
+      echo "::set-output name=BUILD_LAMBDA_FUNCTIONS::true"
+    `);
+    console.log(buildLambdaFunctionsEnvRaw);
+  }
+  if (changeData.packageChanges["lambda-functions"].layer) {
+    console.log("will build layer");
+    const { stdout: buildLambdaFunctionsLayerEnvRaw } = await exec(`
+      echo "::set-output name=BUILD_LAMBDA_FUNCTIONS_LAYER::true"
+    `);
+    console.log(buildLambdaFunctionsLayerEnvRaw);
   }
 })();
