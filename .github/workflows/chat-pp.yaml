@@ -30,10 +30,31 @@ jobs:
   infrastructure:
     name: Infrastructure
     runs-on: ubuntu-latest
+    env:
+      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      AWS_REGION: ${{ secrets.AWS_REGION }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      AWS_CLI_PAGER: ""
     steps:
-      - name: Terraform
-        run: |
-          echo "Will run infrastructure!!!"
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v1
+        with:
+          terraform_wrapper: false
+
+      - name: Initialize Terraform
+        working-directory: ./terraform
+        run: terraform init
+
+      - name: Validate Terraform configuration
+        working-directory: ./terraform
+        run: terraform validate
+
+      - name: Plan Terraform Infrastructure
+        working-directory: ./terraform
+        run: terraform plan
 
   buildScripts:
     name: Build scripts
@@ -140,6 +161,15 @@ jobs:
           node ./scripts/buildFunctions.js
           cd chat-message/build
           cat index.js
+
+  deployLambdaFunctions:
+    name: Deploy Lambda Functions
+    needs: ["buildLambdaFunctions", "infrastructure"]
+    if: ${{ needs.changes.outputs.BUILD_LAMBDA_FUNCTIONS == 'true' && GITHUB_REF_NAME == 'main' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: First
+        run: echo first
 
   buildLambdaFunctionsLayer:
     name: Build Lambda Functions Layer
