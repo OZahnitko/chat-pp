@@ -135,6 +135,11 @@ jobs:
     if: |
       ${{ github.ref == 'refs/heads/main' && needs.changes.outputs.BUILD_LAMBDA_FUNCTIONS == 'true' }}
     runs-on: ubuntu-latest
+    env:
+      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      AWS_REGION: ${{ secrets.AWS_REGION }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      AWS_CLI_PAGER: ""
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
