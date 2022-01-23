@@ -1,9 +1,7 @@
-- [chat-pp](#chat-pp)
-  - [Scripts](#scripts)
-    - [TODO](#todo)
-  - [Lambda Functions](#lambda-functions)
-    - [Updating Lambda Functions](#updating-lambda-functions)
-    - [TODO](#todo-1)
+<!-- no toc -->
+
+- [Scripts](#scripts))
+- [Lambda Functions](#lambda-functions)
 
 # chat-pp
 

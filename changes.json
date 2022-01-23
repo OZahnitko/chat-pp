@@ -1,0 +1,8 @@
+{
+  "packageChanges": {
+    "lambda-functions": {
+      "functions": ["chat-broadcast", "chat-message"],
+      "layer": true
+    }
+  }
+}
