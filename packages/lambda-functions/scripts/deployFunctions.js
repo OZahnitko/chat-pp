@@ -16,11 +16,9 @@ const updateFunctions = async () => {
     changes?.packageChanges?.["lambda-functions"]?.functions.map(
       (newFunctionVersion) =>
         exec(`
-          ls -la
           cd ./${newFunctionVersion}
-          ls -la
           aws lambda update-function-code \
-            --function-name ${newFunctionVersion}
+            --function-name ${newFunctionVersion} \
             --zip-file fileb://function.zip
         `)
     )

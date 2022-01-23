@@ -26,10 +26,6 @@ const buildAllNewFunctions = async () => {
         rm -rf node_modules package.json tsconfig.json yarn.lock
         cd ./build
         zip -r ../function.zip ./
-        cd ..
-        ls -la
-        aws lambda list-aliases \
-          --function-name ${newFunction}
       `)
     )
   );
