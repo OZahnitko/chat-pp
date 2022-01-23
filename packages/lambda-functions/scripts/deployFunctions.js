@@ -54,6 +54,8 @@ const deployProd = async () => {
     changes?.packageChanges?.["lambda-functions"]?.functions.map(
       async (newVersion) => {
         const { stdout } = await exec(`
+        aws lambda wait function-updated \
+          --function-name ${newVersion}
         aws lambda list-aliases \
             --function-name ${newVersion}
       `);
@@ -104,6 +106,8 @@ const deployProd = async () => {
 
       const deployResponse = await exec(`
         cd ./${targetFunction}
+        aws lambda wait function-updated \
+          --function-name ${targetFunction}
         aws deploy create-deployment \
             --cli-input-json file://DEPLOY_${targetFunction}.json \
             --region us-east-1
