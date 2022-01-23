@@ -4,6 +4,6 @@ export const handler = async () => {
     request: "Gimme the loot!",
     request2: "Gimme the loot!",
     reason: "I'm a bastard!",
-    message: "fudge the POLIS!",
+    message: "fudge the POLIS",
   };
 };

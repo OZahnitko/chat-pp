@@ -21,7 +21,7 @@ const updateFunctions = async () => {
         //       --function-name ${newFunctionVersion} \
         //       --zip-file fileb://function.zip
         // `)
-        await exec(` 
+        exec(` 
           ls -la
           cd ./${newFunctionVersion}
           aws lambda list-aliases \
