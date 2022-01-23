@@ -31,8 +31,12 @@ const buildAllNewFunctions = async () => {
   );
   console.log("All done!");
   if (branchName === "main") {
-    exec(`
+    await exec(`
       echo YEEEE
+    `);
+  } else {
+    await exec(`
+      echo not yeeee
     `);
   }
 };
