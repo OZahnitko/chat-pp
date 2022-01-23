@@ -132,6 +132,6 @@ const cleanup = async () => {
 (async () => {
   await updateFunctions();
   await publishVersions();
-  // await deployProd();
+  await deployProd();
   await cleanup();
 })();
