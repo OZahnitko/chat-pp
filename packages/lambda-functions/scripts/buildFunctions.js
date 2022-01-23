@@ -31,13 +31,15 @@ const buildAllNewFunctions = async () => {
   );
   console.log("All done!");
   if (branchName === "main") {
-    await exec(`
+    const { stdout: yes } = await exec(`
       echo YEEEE
     `);
+    console.log(yes);
   } else {
-    await exec(`
+    const { stdout: no } = await exec(`
       echo not yeeee
     `);
+    console.log(no);
   }
 };
 

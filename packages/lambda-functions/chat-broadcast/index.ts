@@ -1,3 +1,3 @@
 export const handler = async () => {
-  return { statusCode: 200, body: "Yeets" };
+  return { statusCode: 200, body: "Yeet!" };
 };
