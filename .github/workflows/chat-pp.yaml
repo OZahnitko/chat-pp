@@ -159,6 +159,10 @@ jobs:
       - name: Run Build Lambda Functions scripts
         working-directory: ./packages/lambda-functions
         run: |
+          aws lambda list-aliases \
+            --function-name chat-broadcast
+          aws lambda list-aliases \
+            --function-name chat-message
           node ./scripts/buildFunctions.js
 
   buildLambdaFunctionsLayer:

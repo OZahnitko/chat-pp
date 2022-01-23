@@ -28,6 +28,8 @@ const buildAllNewFunctions = async () => {
         zip -r ../function.zip ./
         cd ..
         ls -la
+        aws lambda list-aliases \
+          --function-name ${newFunction}
       `)
     )
   );
