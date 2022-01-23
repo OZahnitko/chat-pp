@@ -57,6 +57,10 @@ jobs:
         working-directory: ./terraform
         run: terraform plan
 
+      - name: Provision Infrastructure
+        working-directory: ./terraform
+        run: terraform apply -auto-approve
+
   buildScripts:
     name: Build scripts
     runs-on: ubuntu-latest
