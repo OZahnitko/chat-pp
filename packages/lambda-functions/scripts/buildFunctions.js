@@ -7,15 +7,15 @@ const branchName = process.env.GITHUB_REF_NAME;
 
 const changes = require("../../../changes.json");
 
-console.log(changes.packageChanges["lambda-functions"].functions);
+console.log(changes.packageChanges["lambda-functions"]?.functions);
 console.log(branchName || "local");
 
 const buildAllNewFunctions = async () => {
-  changes.packageChanges["lambda-functions"].functions.forEach(
+  changes.packageChanges["lambda-functions"]?.functions.forEach(
     (newFunctionVersion) => console.log(newFunctionVersion)
   );
   await Promise.all(
-    changes.packageChanges["lambda-functions"].functions.map((newFunction) =>
+    changes.packageChanges["lambda-functions"]?.functions.map((newFunction) =>
       exec(`
         rm -rf ./${newFunction}/build ./${newFunction}/function.zip
         cp package.json ./${newFunction}

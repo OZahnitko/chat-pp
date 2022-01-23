@@ -57,7 +57,6 @@ export const filterChangedFiles = async () => {
   const changedFiles = await findChangedFiles();
   const changedPackages = findChangedPackages(changedFiles);
   // await writeFile("./changes.json", JSON.stringify(changeData));
-  await writeFile("./changes.json", JSON.stringify(changedPackages));
   // return changedPackages;
   return {
     packageChanges: changedPackages.reduce((acc, val) => {
@@ -89,6 +88,7 @@ export const filterChangedFiles = async () => {
 
 const setEnv = async () => {
   const changes = await filterChangedFiles();
+  await writeFile("./changes.json", JSON.stringify(changes));
   if (!!changes.packageChanges["lambda-functions"]?.functions?.length) {
     const { stdout: buildLambdaFunctionsEnvRaw } = await exec(`
       echo "::set-output name=BUILD_LAMBDA_FUNCTIONS::true"
