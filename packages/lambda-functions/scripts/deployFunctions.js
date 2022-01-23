@@ -24,7 +24,9 @@ const updateFunctions = async () => {
         exec(` 
           ls -la
           cd ./${newFunctionVersion}
-          ls -la
+          aws lambda update-function-code \
+            --function-name ${newFunctionVersion} \
+            --zip-file fileb://function.zip
         `)
     )
   );
