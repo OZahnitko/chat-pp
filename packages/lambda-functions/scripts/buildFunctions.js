@@ -3,12 +3,12 @@ const { promisify } = require("util");
 
 const exec = promisify(syncPromise);
 
-const branchName = process.env.GITHUB_REF_NAME;
+const branchName = process.env.GITHUB_REF_NAME || "local-main";
 
 const changes = require("../../../changes.json");
 
 console.log(changes.packageChanges["lambda-functions"]?.functions);
-console.log(branchName || "local");
+console.log(process.argv[2]);
 
 const buildAllNewFunctions = async () => {
   changes.packageChanges["lambda-functions"]?.functions.forEach(
@@ -30,16 +30,13 @@ const buildAllNewFunctions = async () => {
     )
   );
   console.log("All done!");
-  if (branchName === "main") {
-    const { stdout: yes } = await exec(`
-      echo YEEEE
-    `);
-    console.log(yes);
-  } else {
-    const { stdout: no } = await exec(`
-      echo not yeeee
-    `);
-    console.log(no);
+
+  if (process.argv[2] !== "--noDeploy") {
+    if (branchName === "main" || branchName === "local-main") {
+      await exec(`
+        node ./scripts/deployFunctions.js
+      `);
+    }
   }
 };
 

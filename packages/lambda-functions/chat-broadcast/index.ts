@@ -1,3 +1,9 @@
 export const handler = async () => {
-  return { statusCode: 200, body: "Brand new shoes!" };
+  return {
+    statusCode: 200,
+    request: "Gimme the loot!",
+    request2: "Gimme the loot!",
+    reason: "I'm a bastard!",
+    message: "fudge the POLIS",
+  };
 };

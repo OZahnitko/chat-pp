@@ -131,8 +131,9 @@ jobs:
 
   buildLambdaFunctions:
     name: Build Lambda Functions
-    needs: ["changes"]
-    if: ${{ needs.changes.outputs.BUILD_LAMBDA_FUNCTIONS == 'true' }}
+    needs: ["changes", "infrastructure"]
+    if: |
+      ${{ github.ref == 'refs/heads/main' && needs.changes.outputs.BUILD_LAMBDA_FUNCTIONS == 'true' }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -155,26 +156,10 @@ jobs:
         with:
           name: changes
 
-      - name: See changes
-        run: |
-          ls -la
-          cat changes.json
-
       - name: Run Build Lambda Functions scripts
         working-directory: ./packages/lambda-functions
         run: |
           node ./scripts/buildFunctions.js
-          cd chat-message/build
-          cat index.js
-
-  deployLambdaFunctions:
-    name: Deploy Lambda Functions
-    needs: ["changes", "buildLambdaFunctions", "infrastructure"]
-    if: ${{ github.ref == 'refs/heads/main' && needs.changes.outputs.BUILD_LAMBDA_FUNCTIONS == 'true' }}
-    runs-on: ubuntu-latest
-    steps:
-      - name: First
-        run: echo first
 
   buildLambdaFunctionsLayer:
     name: Build Lambda Functions Layer
