@@ -31,6 +31,8 @@ const publishVersions = async () => {
     changes?.packageChanges?.["lambda-functions"]?.functions.map(
       async (newVersion) =>
         await exec(`
+        aws lambda wait function-updated \
+          --function-name ${newVersion}
         aws lambda publish-version \
             --function-name ${newVersion}
       `)
@@ -117,7 +119,7 @@ const cleanup = async () => {
       async (functionName) =>
         await exec(`
           cd ./${functionName}
-          rm -rf DEPLOY_${functionName}.json
+          rm -rf DEPLOY_${functionName}.json package-lock.json
         `)
     )
   );
@@ -127,5 +129,5 @@ const cleanup = async () => {
   await updateFunctions();
   await publishVersions();
   // await deployProd();
-  // await cleanup();
+  await cleanup();
 })();
