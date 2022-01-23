@@ -1,6 +1,4 @@
-<!-- no toc -->
-
-- [Scripts](#scripts))
+- [Scripts](#scripts)<!-- no toc -->
 - [Lambda Functions](#lambda-functions)
 
 # chat-pp

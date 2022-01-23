@@ -23,6 +23,8 @@ const updateFunctions = async () => {
         // `)
         exec(` 
           ls -la
+          cd ./${newFunctionVersion}
+          ls -la
         `)
     )
   );

@@ -21,8 +21,8 @@ const buildAllNewFunctions = async () => {
         cp package.json ./${newFunction}
         cp tsconfig.json ./${newFunction}
         cd ./${newFunction}
-        yarn install
-        yarn build
+        npm install
+        npm run build
         rm -rf node_modules package.json tsconfig.json yarn.lock
         cd ./build
         zip -r ../function.zip ./
