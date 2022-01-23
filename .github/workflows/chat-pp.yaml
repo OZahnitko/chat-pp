@@ -138,8 +138,8 @@ jobs:
         working-directory: ./packages/lambda-functions
         run: |
           node ./scripts/buildFunctions.js
-          cd chat-message
-          ls -la
+          cd chat-message/build
+          cat index.js
 
   buildLambdaFunctionsLayer:
     name: Build Lambda Functions Layer
