@@ -30,6 +30,7 @@ jobs:
   infrastructure:
     name: Infrastructure
     runs-on: ubuntu-latest
+    if: ${{ github.ref == 'refs/head/main' }}
     env:
       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
       AWS_REGION: ${{ secrets.AWS_REGION }}
@@ -165,8 +166,7 @@ jobs:
   deployLambdaFunctions:
     name: Deploy Lambda Functions
     needs: ["changes", "buildLambdaFunctions", "infrastructure"]
-    if: |
-      needs.changes.outputs.BUILD_LAMBDA_FUNCTIONS == 'true' && github.head_ref == 'main'
+    if: ${{ github.ref == 'refs/head/main' && needs.changes.outputs.BUILD_LAMBDA_FUNCTIONS == 'true' }}
     runs-on: ubuntu-latest
     steps:
       - name: First
