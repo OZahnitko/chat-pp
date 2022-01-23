@@ -112,6 +112,12 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
+      - name: Cache yarn
+        uses: actions/setup-node@v2
+        with:
+          node-version: "16"
+          cache: "npm"
+
       - name: Download built scripts
         uses: actions/download-artifact@v2
         with:
@@ -129,7 +135,11 @@ jobs:
           cat changes.json
 
       - name: Run Build Lambda Functions scripts
-        run: node ./packages/lambda-functions/scripts/buildFunctions.js
+        working-directory: ./packages/lambda-functions
+        run: |
+          node ./scripts/buildFunctions.js
+          cd chat-message
+          ls -la
 
   buildLambdaFunctionsLayer:
     name: Build Lambda Functions Layer

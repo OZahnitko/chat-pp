@@ -38,5 +38,5 @@ resource "aws_lambda_alias" "lambda_functions_prod_alias" {
   name             = "prod"
   description      = "Prod alias targeting a stable version of the function."
   function_name    = each.value.arn
-  function_version = "1"
+  function_version = each.value.version
 }

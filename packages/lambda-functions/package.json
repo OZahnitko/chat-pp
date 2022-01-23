@@ -6,8 +6,9 @@
   "scripts": {
     "build": "tsc --outDir ./build",
     "build:all": "echo TODO: Build all Lambda functions.",
-    "build:chat-message": "node ./scripts/chat-message.js",
-    "build:layer": "echo TODO: ./scripts/build-layer.sh"
+    "build:chat-message": "node ./scripts/build_chat-message.js",
+    "deploy:chat-message": "node ./scripts/deploy_chat-message.js",
+    "build:layer": "echo TODO: ./scripts/buildLayer.sh"
   },
   "devDependencies": {
     "@types/node": "^17.0.10",
