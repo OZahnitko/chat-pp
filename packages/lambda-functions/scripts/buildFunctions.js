@@ -1,5 +1,4 @@
 const { exec: syncPromise } = require("child_process");
-const { stdout } = require("process");
 const { promisify } = require("util");
 
 const exec = promisify(syncPromise);
@@ -8,13 +7,11 @@ const branchName = process.env.GITHUB_REF_NAME || "local-main";
 
 const changes = require("../../../changes.json");
 
-console.log(changes.packageChanges["lambda-functions"]?.functions);
-
 const buildAllNewFunctions = async () => {
   changes.packageChanges["lambda-functions"]?.functions.forEach(
     (newFunctionVersion) => console.log(newFunctionVersion)
   );
-  const res = await Promise.all(
+  await Promise.all(
     changes.packageChanges["lambda-functions"]?.functions.map((newFunction) =>
       exec(`
         rm -rf ./${newFunction}/build ./${newFunction}/function.zip
@@ -29,7 +26,6 @@ const buildAllNewFunctions = async () => {
       `)
     )
   );
-  console.log(res);
   console.log("All done!");
 
   if (process.argv[2] !== "--noDeploy") {

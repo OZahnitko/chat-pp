@@ -7,4 +7,5 @@ export const handler = async (event: HandlerEvent) => ({
   request2: "Gimme the loot!",
   reason: "I'm a bastard!",
   message: "FUDGE THE POLIS!!!",
+  more: "yes",
 });

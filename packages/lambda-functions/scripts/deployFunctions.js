@@ -12,7 +12,7 @@ const changes = require("../../../changes.json");
 let LATEST_FUNCTION_VERSIONS;
 
 const updateFunctions = async () => {
-  const res = await Promise.all(
+  await Promise.all(
     changes?.packageChanges?.["lambda-functions"]?.functions.map(
       (newFunctionVersion) =>
         exec(`
@@ -23,7 +23,6 @@ const updateFunctions = async () => {
         `)
     )
   );
-  console.log(res);
 };
 
 const publishVersions = async () => {
@@ -121,7 +120,7 @@ const cleanup = async () => {
 
 (async () => {
   await updateFunctions();
-  // await publishVersions();
+  await publishVersions();
   // await deployProd();
   // await cleanup();
 })();
