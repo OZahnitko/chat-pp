@@ -31,7 +31,9 @@ const buildAllNewFunctions = async () => {
   );
   console.log("All done!");
   if (branchName === "main") {
-    console.log("Will also try to deploy!");
+    exec(`
+      echo YEEEE
+    `);
   }
 };
 
