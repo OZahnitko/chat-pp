@@ -89,13 +89,13 @@ export const filterChangedFiles = async () => {
 
 const setEnv = async () => {
   const changes = await filterChangedFiles();
-  if (!!changes.packageChanges["lambda-functions"].functions?.length) {
+  if (!!changes.packageChanges["lambda-functions"]?.functions?.length) {
     const { stdout: buildLambdaFunctionsEnvRaw } = await exec(`
       echo "::set-output name=BUILD_LAMBDA_FUNCTIONS::true"
     `);
     console.log(buildLambdaFunctionsEnvRaw);
   }
-  if (!!changes.packageChanges["lambda-functions"].layer) {
+  if (!!changes.packageChanges["lambda-functions"]?.layer) {
     const { stdout: buildLambdaFunctionsLayerEnvRaw } = await exec(`
       echo "::set-output name=BUILD_LAMBDA_FUNCTIONS_LAYER::true"
     `);

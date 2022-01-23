@@ -29,6 +29,7 @@ const buildAllNewFunctions = async () => {
       `)
     )
   );
+  console.log("All done!");
 };
 
 buildAllNewFunctions();
