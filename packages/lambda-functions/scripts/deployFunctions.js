@@ -15,17 +15,11 @@ const updateFunctions = async () => {
   const res = await Promise.all(
     changes?.packageChanges?.["lambda-functions"]?.functions.map(
       (newFunctionVersion) =>
-        //   exec(`
-        //   cd ./${newFunctionVersion}
-        //   aws lambda update-function-code \
-        //       --function-name ${newFunctionVersion} \
-        //       --zip-file fileb://function.zip
-        // `)
-        exec(` 
-          ls -la
+        exec(`
           cd ./${newFunctionVersion}
-          aws lambda list-aliases \
+          aws lambda update-function-code \
             --function-name ${newFunctionVersion}
+            --zip-file fileb://function.zip
         `)
     )
   );
