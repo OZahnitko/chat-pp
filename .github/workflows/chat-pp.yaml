@@ -165,7 +165,7 @@ jobs:
   deployLambdaFunctions:
     name: Deploy Lambda Functions
     needs: ["buildLambdaFunctions", "infrastructure"]
-    if: ${{ needs.changes.outputs.BUILD_LAMBDA_FUNCTIONS == 'true' && "$GITHUB_REF_NAME" == 'main' }}
+    if: ${{ needs.changes.outputs.BUILD_LAMBDA_FUNCTIONS == 'true' }} && GITHUB_REF_NAME == 'main'
     runs-on: ubuntu-latest
     steps:
       - name: First
