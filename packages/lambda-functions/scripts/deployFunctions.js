@@ -14,8 +14,8 @@ let LATEST_FUNCTION_VERSIONS;
 const updateFunctions = async () => {
   const res = await Promise.all(
     changes?.packageChanges?.["lambda-functions"]?.functions.map(
-      (newFunctionVersion) =>
-        exec(`
+      async (newFunctionVersion) =>
+        await exec(`
           cd ./${newFunctionVersion}
           aws lambda update-function-code \
             --function-name ${newFunctionVersion} \
@@ -28,8 +28,9 @@ const updateFunctions = async () => {
 
 const publishVersions = async () => {
   const publishVersionResponses = await Promise.all(
-    changes?.packageChanges?.["lambda-functions"]?.functions.map((newVersion) =>
-      exec(`
+    changes?.packageChanges?.["lambda-functions"]?.functions.map(
+      async (newVersion) =>
+        await exec(`
         aws lambda publish-version \
             --function-name ${newVersion}
       `)
