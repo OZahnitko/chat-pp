@@ -6,6 +6,6 @@ export const handler = async () => {
     reason: "I'm a bastard!",
     message: "fudge the POLIS!!!",
     more: "yes",
-    "all-in": "ALL IN!",
+    "all-in": "ALL IN!!",
   };
 };
