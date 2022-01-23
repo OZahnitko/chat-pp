@@ -39,6 +39,7 @@ const publishVersions = async () => {
     const res = JSON.parse(val.stdout);
     return { ...acc, [res.FunctionName]: res.Version };
   }, {});
+  console.log(LATEST_FUNCTION_VERSIONS);
 };
 
 const deployProd = async () => {
@@ -121,6 +122,6 @@ const cleanup = async () => {
 (async () => {
   await updateFunctions();
   await publishVersions();
-  await deployProd();
-  await cleanup();
+  // await deployProd();
+  // await cleanup();
 })();
