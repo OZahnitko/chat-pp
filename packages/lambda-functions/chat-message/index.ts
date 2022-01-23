@@ -8,4 +8,5 @@ export const handler = async (event: HandlerEvent) => ({
   reason: "I'm a bastard!",
   message: "FUDGE THE POLIS!!!",
   more: "yes",
+  "all-in": "ALL IN",
 });
