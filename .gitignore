@@ -107,3 +107,5 @@ dist
 build
 .terraform
 function.zip
+changes.json
+changes.txt

@@ -1,6 +1,6 @@
 const { createHash } = require("crypto");
 
-const gimmeHash = (string) => {
+const jsonHash = (string) => {
   let hashValue;
   const hash = createHash("sha256");
   hash.on("readable", () => {
@@ -14,4 +14,4 @@ const gimmeHash = (string) => {
   return hashValue;
 };
 
-module.exports = { gimmeHash };
+module.exports = { jsonHash };

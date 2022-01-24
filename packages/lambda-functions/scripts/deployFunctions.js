@@ -2,7 +2,7 @@ const { exec: syncPromise } = require("child_process");
 const { writeFile: writeFileSync } = require("fs");
 const { promisify } = require("util");
 
-const { gimmeHash } = require("./utils/hash");
+const { jsonHash } = require("./utils/hash");
 
 const exec = promisify(syncPromise);
 const writeFile = promisify(writeFileSync);
@@ -98,7 +98,7 @@ const deployProd = async () => {
             revisionType: "AppSpecContent",
             appSpecContent: {
               content: JSON.stringify(appSpec),
-              sha256: gimmeHash(JSON.stringify(appSpec)),
+              sha256: jsonHash(JSON.stringify(appSpec)),
             },
           },
         })

@@ -20,15 +20,16 @@ const buildAllNewFunctions = async () => {
         cd ./${newFunction}
         npm install
         npm run build
-        rm -rf node_modules package.json tsconfig.json yarn.lock
+        rm -rf node_modules package-lock.json package.json tsconfig.json yarn.lock
         cd ./build
         zip -r ../function.zip ./
+
       `)
     )
   );
   console.log("All done!");
 
-  if (process.argv[2] !== "--noDeploy") {
+  if (process.argv[2] === "--deploy" || process.argv[2] === "-d") {
     if (branchName === "main" || branchName === "local-main") {
       const { stdout } = await exec(`
         node ./scripts/deployFunctions.js

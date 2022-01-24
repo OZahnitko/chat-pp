@@ -164,7 +164,7 @@ jobs:
       - name: Run Build Lambda Functions scripts
         working-directory: ./packages/lambda-functions
         run: |
-          node ./scripts/buildFunctions.js
+          node ./scripts/buildFunctions.js -d
 
   buildLambdaFunctionsLayer:
     name: Build Lambda Functions Layer

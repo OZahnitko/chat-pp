@@ -1,8 +1,12 @@
 {
   "packageChanges": {
     "lambda-functions": {
-      "functions": ["chat-broadcast", "chat-message"],
-      "layer": true
+      "functions": [
+        "chat-on-connect",
+        "chat-on-disconnect",
+        "chat-send-message"
+      ],
+      "layer": false
     }
   }
 }
